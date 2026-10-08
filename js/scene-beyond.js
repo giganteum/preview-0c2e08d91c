@@ -28,21 +28,21 @@ function beyondInit(){
   function drawVessel(c,x,y,a,len,fish){ c.save(); c.translate(x,y); c.rotate(a); c.strokeStyle='rgba(243,239,228,.6)'; c.lineWidth=2; c.beginPath(); c.moveTo(-len*.45,-len*.1); c.lineTo(-len*2.4,-len*.6); c.moveTo(-len*.45,len*.1); c.lineTo(-len*2.4,len*.6); c.stroke();
     c.fillStyle='rgba(21,32,26,.2)'; c.beginPath(); c.ellipse(3,4,len*.5,len*.16,0,0,TAU); c.fill(); c.fillStyle=fish?'#E9E4D8':'#F3EFE4'; c.beginPath(); c.moveTo(len*.5,0); c.quadraticCurveTo(len*.2,-len*.17,-len*.45,-len*.14); c.lineTo(-len*.45,len*.14); c.quadraticCurveTo(len*.2,len*.17,len*.5,0); c.fill();
     c.fillStyle=fish?'#8A5F12':'#6E7F86'; c.fillRect(-len*.05,-len*.07,len*.2,len*.14); if(fish){ c.strokeStyle='#5E5140'; c.lineWidth=1; c.beginPath(); c.moveTo(-len*.3,0); c.lineTo(-len*.75,-len*.25); c.moveTo(-len*.3,0); c.lineTo(-len*.75,len*.25); c.stroke(); } c.restore(); }
-  const LAB={forest:['Forest','overhead'],space:['Whales','from space'],offshore:['Offshore','overhead'],savanna:['Savanna','overhead'],streets:['City streets','overhead'],sea:['Open water','from a boat'],reef:['Reef','from a dive'],trap:['Trail','camera trap']};
+  const LAB={forest:['Forest','overhead'],whales:['Whales','aerial'],offshore:['Offshore','overhead'],savanna:['Savanna','overhead'],streets:['City streets','overhead'],sea:['Open water','from a boat'],reef:['Reef','from a dive'],trap:['Trail','camera trap']};
   // zone content in zone coordinates (ZW wide, TH tall); ground scenes use a horizon at .42/.5 of the tile height
-  function zoneData(kind){ const z={kind,objs:[],targets:[],label:LAB[kind][0],view:LAB[kind][1],top:LAB[kind][1]==='overhead'||kind==='space',img:null};
+  function zoneData(kind){ const z={kind,objs:[],targets:[],label:LAB[kind][0],view:LAB[kind][1],top:LAB[kind][1]==='overhead'||kind==='whales',img:null};
     const push=(spr,n)=>{ for(let k=0;k<n;k++) z.objs.push({t:'c',x:r()*ZW,y:r()*TH,spr,si:Math.floor(r()*spr.length)}); };
     if(kind==='forest'){ z.ground='#B9C9A6'; push(FOREST,150); }
     if(kind==='savanna'){ z.ground='#D8C9A6'; for(let k=0;k<80;k++) z.objs.push({t:'s',x:r()*ZW,y:r()*TH,r:2+r()*4}); push(SAV,40); for(let k=0;k<9;k++) z.objs.push({t:'a',x:r()*ZW,y:r()*TH,a:r()*TAU,s:6+r()*3}); }
     if(kind==='streets'){ z.ground='#CFC9BD'; for(let k=0;k<4;k++) z.objs.push({t:'road',x:0,y:70+k*150,w:ZW,h:26}); for(let k=0;k<3;k++) z.objs.push({t:'road',x:70+k*180,y:0,w:24,h:TH}); for(let k=0;k<34;k++) z.objs.push({t:'b',x:r()*ZW,y:r()*TH,w:40+r()*90,h:30+r()*60}); push(STREET,50); }
-    if(kind==='space'){ z.ground=WATER; for(let k=0;k<26;k++) z.objs.push({t:'g',x:r()*ZW,y:r()*TH,w:20+r()*60});
+    if(kind==='whales'){ z.ground=WATER; for(let k=0;k<26;k++) z.objs.push({t:'g',x:r()*ZW,y:r()*TH,w:20+r()*60});
       for(let k=0;k<7;k++){ const s=11+r()*5, y=k<4?TH*(.4+r()*.2):r()*TH; z.objs.push({t:'w',x:(k+.3+r()*.4)*ZW/7,y,a:r()*TAU,s,tg:s*2}); } }
     if(kind==='offshore'){ z.ground=WATER; for(let k=0;k<18;k++) z.objs.push({t:'g',x:r()*ZW,y:r()*TH,w:20+r()*50});
       z.objs.push({t:'p',x:ZW*.3,y:TH*.47,s:34,tg:62}); z.objs.push({t:'p',x:ZW*.86,y:TH*.18,s:24});
       const boats=[[.6,.52,-.5,40,1],[.72,.44,.4,26,0],[.1,.56,2.8,30,1],[.95,.58,3.4,22,0],[.62,.84,1.2,30,1],[.2,.14,-.6,26,0]];
       for(const [bx,by,a,len,fish] of boats) z.objs.push({t:'v',x:ZW*bx,y:TH*by,a,len,fish,tg:by>.38&&by<.62?len*.75:0}); }
     if(z.top){ // ring targets: trees in forest and streets, animals in savanna
-      const pool=(kind==='space'||kind==='offshore'?z.objs.filter(o=>o.tg).map(o=>({x:o.x,y:o.y,r:o.tg})):kind==='savanna'?z.objs.filter(o=>o.t==='a').map(o=>({x:o.x,y:o.y,r:o.s*1.9})):z.objs.filter(o=>o.t==='c').map(o=>({x:o.x,y:o.y,r:o.spr[o.si].r*1.15})).sort((a,b)=>b.r-a.r)).filter(c=>c.y>TH*.38&&c.y<TH*.62);
+      const pool=(kind==='whales'||kind==='offshore'?z.objs.filter(o=>o.tg).map(o=>({x:o.x,y:o.y,r:o.tg})):kind==='savanna'?z.objs.filter(o=>o.t==='a').map(o=>({x:o.x,y:o.y,r:o.s*1.9})):z.objs.filter(o=>o.t==='c').map(o=>({x:o.x,y:o.y,r:o.spr[o.si].r*1.15})).sort((a,b)=>b.r-a.r)).filter(c=>c.y>TH*.38&&c.y<TH*.62);
       for(const c of pool){ if(z.targets.length>=12) break; if(z.targets.every(m=>Math.abs(m.x-c.x)>50)) z.targets.push(c); }
       if(kind==='savanna'&&!z.targets.length){ z.objs.push({t:'a',x:ZW*.5,y:TH*.5,a:1,s:8}); z.targets.push({x:ZW*.5,y:TH*.5,r:15}); } }
     return z; }
@@ -64,9 +64,9 @@ function beyondInit(){
     if(kind==='reef'){ const mx=ZW*.5+4*Math.sin(tt*.8), my=h*.5+3*Math.sin(tt*1.1); return [{draw:c=>drawWhaleShark(c,ZW*.2,h*.8,24,9),box:[ZW*.2+.2*24,h*.8,5.6*24,2.2*24],lab:'whale shark'},{draw:c=>drawManta(c,mx,my,42,7),box:[mx,my+.45*42,3.5*42,2.4*42],lab:'manta · match 0.93'}]; }
     if(kind==='trap'){ const ax=ZW*.52, ay=h*.5+8; return [{draw:c=>drawAntelope(c,ax,ay,26,tt*6),box:[ax+.3*26,ay-.4*26,2.9*26,2.75*26],lab:'antelope'}]; }
     return []; }
-  const TILES=['forest','space','offshore','sea','trap','streets'];
-  // staging A/B: ?beyond=pan rolls one environment into the next instead of showing all six at once
-  const PAN=new URLSearchParams(location.search).get('beyond')==='pan', HOLD=4.2, ROLL=1.1;
+  const TILES=['forest','whales','offshore','sea','trap','streets'];
+  // one environment at a time, rolling into the next; ?beyond=mosaic shows all six at once instead
+  const PAN=new URLSearchParams(location.search).get('beyond')!=='mosaic', HOLD=4.2, ROLL=1.1;
   let t=0; const lock={}; // per tile: {key, since}
   function draw(){ const W=S.W,H=S.H; ctx.clearRect(0,0,W,H);
     if(PAN){ // one environment at a time; every HOLD seconds the strip rolls left to the next
