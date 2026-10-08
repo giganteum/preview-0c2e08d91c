@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Giganteum — Every individual tree, monitored</title>
+<meta name="description" content="Giganteum is a nonprofit that finds and assesses individual trees in satellite, aerial and drone imagery.">
+<link rel="icon" href="assets/logos/logo-06u2/favicon.svg?h=ea83f946c8" type="image/svg+xml">
+<link rel="icon" href="assets/logos/logo-06u2/favicon.ico?h=4b74110f3c" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/logos/logo-06u2/favicon-180.png?h=ba5bebc18b">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F3EFE4">
+<link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Giganteum site styles. Fonts are self-hosted (SIL OFL 1.1, see fonts/OFL-*.txt). */
+/* latin-ext */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(fonts/fraunces-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(fonts/fraunces-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/fraunces-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/fraunces-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/fraunces-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/fraunces-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(fonts/ibm-plex-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- tokens: this site is light by decision; the dark scheme keeps the same values ---------- */
+/* staging: type variants (?type=calm|plex|plexserif|source). IBM Plex (OFL) and Source Serif 4 (OFL, fonts/OFL-SourceSerif4.txt). */
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-600-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'IBM Plex Serif';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-serif-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'IBM Plex Serif';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-serif-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-600-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'IBM Plex Serif';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-serif-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'IBM Plex Serif';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-serif-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+
+:root{
+  --paper:#F3EFE4; --ink:#15201A; --dim:#4B5A50; --rule:rgba(21,32,26,.16); --rule-strong:#15201A;
+  --moss:#2E5241; --accent:#A8761F; --accent-text:#8A5F12; --canopy:#5E8A4C;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif; --sans:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;
+  --gutter:clamp(20px,5.5vw,80px);
+  color-scheme:light;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){ --paper:#F3EFE4; --ink:#15201A; } }
+:root[data-theme="dark"]{ --paper:#F3EFE4; --ink:#15201A; }
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+::selection{background:var(--accent);color:var(--paper)}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--serif);font-weight:300;letter-spacing:-.015em}
+h1{font-size:clamp(44px,6vw,84px);line-height:.98;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:clamp(32px,3.3vw,44px);line-height:1.05;text-wrap:balance}
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--gutter)}
+.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--moss)}
+.dim{color:var(--dim)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 24px;font:500 15px/1 var(--sans);text-decoration:none;border:1px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer}
+.btn:hover{background:rgba(21,32,26,.06)}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:#26362d}
+.textlink{font-size:15px;color:var(--dim);text-decoration:underline;text-underline-offset:4px}
+.textlink:hover{color:var(--ink)}
+
+/* ---------- nav ---------- */
+nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0;position:relative;z-index:5}
+.wordmark{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:22px;text-decoration:none;letter-spacing:.01em}
+.wordmark span{color:var(--canopy)}
+/* logo 06u-2 mark; clear space >= the trunk's diameter (README) */
+.wordmark{display:inline-flex;align-items:center}
+.wordmark .mark{display:block;width:28px;height:28px;flex-shrink:0;margin-right:10px}
+.links{display:flex;gap:32px;font-size:15px}
+.links a{color:var(--dim);text-decoration:none}
+.links a:hover{color:var(--ink)}
+.menu{display:none;width:44px;height:44px;border:1px solid var(--rule);background:transparent;align-items:center;justify-content:center;cursor:pointer}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:min(720px,calc(100svh - 190px));display:flex;flex-direction:column}
+.hero-copy{position:relative;z-index:2;max-width:620px;padding:40px 0 60px;display:flex;flex-direction:column;gap:26px}
+.hero-head,.hero-body{display:flex;flex-direction:column;gap:26px}
+.hero-copy p{font-size:clamp(17px,1.4vw,19px);max-width:52ch;color:var(--dim)}
+.cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding-top:4px}
+.scene{position:absolute;inset:0;z-index:1}
+.scene canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.aerial-scene{background:radial-gradient(60% 60% at 40% 50%,rgba(216,201,166,.55),rgba(216,201,166,0))}
+.beyond-scene{background:radial-gradient(60% 60% at 50% 50%,rgba(185,201,166,.35),rgba(185,201,166,0))}
+.pause{position:absolute;top:8px;right:0;z-index:3;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--rule);border-radius:999px;background:rgba(243,239,228,.8);color:var(--dim);cursor:pointer}
+.pause .i-play{display:none}
+.pause[aria-pressed="true"] .i-pause{display:none}
+.pause[aria-pressed="true"] .i-play{display:block}
+.pause:hover{color:var(--ink)}
+.pause[hidden]{display:none}
+.beyond-scene .pause{top:auto;bottom:8px;right:8px}
+.record{position:absolute;right:0;bottom:44px;z-index:3;width:290px;opacity:0;transform:translateY(6px);transition:opacity .45s,transform .45s;padding:16px 18px 12px;background:var(--paper);border:1px solid var(--rule);font-size:13px;line-height:1.35}
+.record.show{opacity:1;transform:none}
+.record .hist-label{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);padding:10px 0 0;border-top:1px solid var(--rule);opacity:0;transition:opacity .4s}
+.record .hist-label.on{opacity:1}
+.record .row.status.dead span:last-child{color:#6B6A62}
+.record .head{display:flex;flex-wrap:wrap;column-gap:12px;justify-content:space-between;align-items:baseline;padding-bottom:8px}
+.record .head b,.record .head i{white-space:nowrap}
+.record .head b{font-family:var(--serif);font-weight:400;font-size:15px}
+.record .head i{font-style:normal;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.record .row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:1px solid var(--rule);opacity:0;transform:translateY(3px);transition:opacity .35s,transform .35s}
+.record .row.on{opacity:1;transform:none}
+.record .row span:first-child{color:var(--dim)}
+.record .row span:last-child{font-weight:500;text-align:right}
+.record .row.status span:last-child{color:var(--accent-text)}
+.record .row.status.ok span:last-child{color:var(--moss)}
+.record .hist{display:flex;gap:14px;align-items:flex-end;padding:6px 0 4px;opacity:0;transition:opacity .5s}
+.record .hist.on{opacity:1}
+.record .hist div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--dim)}
+.record .hist svg{display:block}
+.caption{position:absolute;right:0;bottom:16px;z-index:3;font-size:12.5px;color:var(--dim)}
+
+/* ---------- strips and sections ---------- */
+.col-label.how{margin-top:12px;padding-bottom:0}
+.fine{margin-top:36px;padding-top:16px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--dim);max-width:70ch}
+.bridge{font-size:13px!important;letter-spacing:.08em;text-transform:uppercase;color:var(--moss)!important;margin-top:6px}
+.loop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:8px}
+.loop div{padding:18px 20px 22px 0}
+.loop b{display:block;font-family:var(--serif);font-weight:400;font-size:19px}
+.loop b em{font-style:normal;color:var(--accent-text);font-family:var(--sans);font-size:13px;margin-right:10px}
+.loop p{font-size:14px;color:var(--dim);margin-top:8px}
+section.block{padding-top:clamp(64px,7vw,96px);padding-bottom:clamp(48px,5vw,72px)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:32px}
+.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}
+.lead{display:flex;flex-direction:column;gap:18px;padding-right:32px}
+.lead p{font-size:16px;color:var(--dim)}
+.col-label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--moss);padding-bottom:12px}
+.item{display:flex;gap:20px;padding:22px 0;border-top:1px solid var(--rule)}
+.item em{font-style:normal;font-family:var(--serif);font-size:14px;color:var(--accent-text);width:28px;flex-shrink:0;padding-top:6px}
+.item b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.15}
+.item p{font-size:15.5px;color:var(--dim);margin-top:8px}
+.pull{margin-top:28px;padding-top:22px;border-top:1px solid var(--rule-strong);font-family:var(--serif);font-size:22px;line-height:1.3}
+.stages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:44px;border-top:1px solid var(--rule)}
+.stages div{padding:24px 24px 0 0}
+.stages em{font-style:normal;font-family:var(--serif);font-size:14px;color:var(--accent-text)}
+.stages b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;margin-top:8px;line-height:1.15}
+.stages p{font-size:15px;color:var(--dim);margin-top:10px}
+.stages small{display:block;font-size:14px;color:var(--moss);margin-top:12px}
+.measured{margin-top:36px;padding-top:20px;border-top:1px solid var(--rule);font-size:15.5px;color:var(--dim);max-width:70ch}
+
+/* figures in Trees (v1 default; ?v=2 / ?v=4 alternatives) and How it adapts (v3); ?v=0 = none */
+.draft-band{grid-column:1/-1;position:relative;height:290px;margin-top:12px}
+.draft-band[hidden],html:not(.js) .draft-band{display:none}
+.draft-band canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.draft-band[data-v="2"],.draft-band[data-v="3"]{height:260px}
+.draft-band[data-v="4"]{height:210px}
+#trees .grid:has(> .draft-band:not([hidden])){grid-auto-flow:row dense}
+.figure-note{grid-column:1/-1;max-width:70ch}
+.figure-note[hidden]{display:none}
+.figure-note p{font-size:15.5px;color:var(--dim)}
+.figure-note p+p{margin-top:10px}
+
+/* aerial: island on the left, text on the right */
+.aerial-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:center}
+.aerial-scene{grid-column:span 7;position:relative;height:520px;margin-left:calc(-1 * var(--gutter))}
+.aerial-scene canvas{position:absolute;inset:0;width:100%;height:100%}
+.tally{position:absolute;left:var(--gutter);bottom:24px;z-index:2;display:flex;gap:22px;padding:12px 16px;background:rgba(243,239,228,.94);border:1px solid var(--rule);font-size:13px}
+.tally div{display:flex;flex-direction:column;gap:2px}
+.tally span{color:var(--dim)}
+.tally b{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1}
+.frame-label{position:absolute;left:var(--gutter);top:20px;z-index:2;font-size:12.5px;color:var(--dim);background:rgba(243,239,228,.85);padding:4px 8px;border:1px solid var(--rule)}
+.aerial-copy{grid-column:8 / span 5;display:flex;flex-direction:column;gap:18px}
+.aerial-copy p{color:var(--dim);font-size:16.5px}
+.sec-head,.sec-body{display:flex;flex-direction:column;gap:18px}
+
+/* beyond trees */
+.beyond-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:start}
+.beyond-copy{grid-column:span 6;display:flex;flex-direction:column;gap:18px}
+.beyond-copy p{color:var(--dim);font-size:16.5px}
+.beyond-list{margin-top:8px;list-style:none}
+.beyond-list li{padding:14px 0;border-top:1px solid var(--rule);font-size:16px}
+.beyond-list li b{font-weight:500}
+.beyond-list li span{color:var(--dim)}
+.beyond-scene{grid-column:8 / span 5;position:relative;height:420px}
+.beyond-scene canvas{position:absolute;inset:0;width:100%;height:100%}
+.cond{position:absolute;left:0;bottom:0;z-index:2;font-size:13px;color:var(--dim);background:rgba(243,239,228,.9);border:1px solid var(--rule);padding:8px 12px;display:flex;gap:10px;align-items:center}
+.cond b{font-family:var(--serif);font-weight:500;font-size:16px;color:var(--ink);min-width:110px}
+.cond i{font-style:normal;color:var(--moss)}
+.vswitch{position:absolute;right:0;top:-38px;z-index:2;display:flex;gap:4px;align-items:center;font-size:12px;color:var(--dim)}
+.vswitch button{min-height:30px;padding:4px 10px;border:1px solid var(--rule);background:transparent;font:500 12px var(--sans);color:var(--dim);cursor:pointer}
+.vswitch button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* who / contact / footer */
+.who{border-top:1px solid var(--rule)}
+.who p{font-size:clamp(19px,1.9vw,26px);font-family:var(--serif);line-height:1.35;max-width:36em}
+.who p+p{margin-top:22px}
+.contact{border-top:1px solid var(--rule)}
+.contact p{color:var(--dim);max-width:56ch;margin-top:16px}
+footer{border-top:1px solid var(--rule);padding:26px 0 40px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--dim)}
+
+/* about page */
+.about-inner{max-width:70ch;padding:40px 0 80px}
+.about-inner h1{font-size:clamp(36px,4.5vw,64px);margin-bottom:28px}
+.about-inner h2{font-size:28px;margin:44px 0 14px}
+.about-inner p{font-size:18px;line-height:1.6;margin-top:16px}
+.about-inner p.note{font-size:14px;color:var(--dim);border:1px solid var(--rule);padding:12px 14px}
+
+@media (max-width:1000px){
+  .c4,.c6,.c8{grid-column:span 12}
+  .lead{padding-right:0}
+  .stages{grid-template-columns:1fr}
+  .aerial-grid,.beyond-grid{display:flex;flex-direction:column;gap:28px}
+  .aerial-copy,.beyond-copy{display:contents}
+  .sec-head{order:1}.aerial-scene,.beyond-scene{order:2}.sec-body{order:3}
+  .aerial-scene{width:calc(100% + 2*var(--gutter));margin:0 calc(-1 * var(--gutter));height:420px}
+  .beyond-scene{width:100%;height:360px}
+  /* hero: eyebrow + headline -> canopy -> body; the record sits under the canopy, not over it */
+  .hero{min-height:0}
+  .hero-copy{display:contents}
+  .hero-head{order:1;padding:16px 0 0}
+  #hero-scene{order:2;position:relative;height:var(--hero-canvas-h);margin:26px calc(-1 * var(--gutter)) 0;--hero-canvas-h:420px}
+  .hero-body{order:3;padding:28px 0 8px}
+  #hero-scene .pause{top:calc(var(--hero-canvas-h) - 48px);bottom:auto;left:var(--gutter);right:auto}
+  .record{right:var(--gutter);bottom:16px;width:250px;font-size:12.5px}
+  .aerial-scene .pause{right:var(--gutter)}
+  /* drafts keep the small-screen order: headline -> graphic -> body */
+  html.js #trees:has(.draft-band:not([hidden])) .lead,html.js #adapts:has(.draft-band:not([hidden])) .lead{display:contents}
+  html.js #trees:has(.draft-band:not([hidden])) .lead>*,html.js #adapts:has(.draft-band:not([hidden])) .lead>*{grid-column:1/-1}
+  #trees h2,#adapts h2{order:1}
+  .draft-band{order:2;margin-top:0}
+  #trees .lead p,#adapts .lead p{order:3}
+  #trees .c4:not(.lead){order:4}
+  #draft-trees2,#note-ew{order:5}
+}
+@media (max-width:900px){
+  .links{display:none;position:absolute;right:0;top:80px;flex-direction:column;gap:0;background:var(--paper);border:1px solid var(--rule);padding:8px 0;min-width:220px}
+  .links.open{display:flex}
+  .links a{padding:12px 18px}
+  .menu{display:inline-flex}
+  /* without JavaScript the menu button cannot work, so the links stay in the page */
+  html:not(.js) .menu{display:none}
+  html:not(.js) .links{display:flex;position:static;flex-direction:row;flex-wrap:wrap;gap:4px 20px;border:0;background:none;padding:0;min-width:0}
+  html:not(.js) .links a{padding:4px 0}
+  html:not(.js) nav{flex-wrap:wrap;gap:12px}
+  .loop{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  /* phones: the record would cover the canopy, so it moves under it and the leader line drops into it */
+  #hero-scene{height:auto;--hero-canvas-h:340px}
+  #hero-scene canvas{position:relative;height:var(--hero-canvas-h)}
+  .record{position:relative;right:auto;bottom:auto;margin:0 var(--gutter) 0 auto}
+  /* ...and it is always there: an empty record (labels, a dash per value) until a tree is picked,
+     then the values fill in; between trees it returns to empty instead of leaving a blank block */
+  .record,.record.show{opacity:1;transform:none}
+  .record .row,.record .hist-label{opacity:1;transform:none}
+  .record .row span:last-child{transition:color .35s}
+  .record .row:not(.on) span:last-child{color:transparent!important;position:relative}
+  .record .row:not(.on) span:last-child::after{content:'—';position:absolute;right:0;color:var(--dim);opacity:.5;
+    transform-origin:right center;animation:dash-wait 3.6s ease-in-out infinite}
+  /* a slow wave down the empty record: each dash brightens and grows a little, row after row */
+  .record .row[data-f="status"] span:last-child::after{animation-delay:.24s}
+  .record .row[data-f="cls"] span:last-child::after{animation-delay:.48s}
+  .record .row[data-f="crown"] span:last-child::after{animation-delay:.72s}
+  .record .row[data-f="pos"] span:last-child::after{animation-delay:.96s}
+  .record .row[data-f="caps"] span:last-child::after{animation-delay:1.2s}
+  .record .row[data-f="sensors"] span:last-child::after{animation-delay:1.44s}
+  html.motion-paused .record .row span:last-child::after{animation-play-state:paused}
+}
+@media (max-width:640px){ .draft-band[data-v="1"]{height:470px} .draft-band[data-v="2"],.draft-band[data-v="3"]{height:190px} .draft-band[data-v="4"]{height:300px} }
+@media (max-width:560px){ .beyond-scene{height:480px} .loop{grid-template-columns:1fr} .loop div{padding-right:0} .cta .btn{width:100%} .tally{gap:14px} }
+@keyframes dash-wait{0%,70%,100%{opacity:.45;transform:none}25%{opacity:.9;transform:scaleX(1.2) scaleY(1.15)}}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} .record .row,.record .hist{transition:none} .record .row span:last-child::after{animation:none!important} }
+/* ?freeze=1: deterministic frames for screenshot tests */
+html.freeze *,html.freeze *::before,html.freeze *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+
+/* ---------- staging: type variants, picked with ?type= (default = the current Fraunces set) ----------
+   Shared by every variant: no light display weight, no negative tracking, no uppercase tracked labels,
+   a smaller top headline. These are the parts of the current look that read as a template. */
+:root[data-type] h1,:root[data-type] h2,:root[data-type] h3{letter-spacing:0}
+:root[data-type] h1{font-size:clamp(40px,5vw,66px);line-height:1.06}
+:root[data-type] h2{font-size:clamp(28px,2.8vw,38px);line-height:1.12}
+:root[data-type] .eyebrow,:root[data-type] .col-label,:root[data-type] .bridge,
+:root[data-type] .record .hist-label,:root[data-type] .record .head i{text-transform:none;letter-spacing:0;font-weight:500}
+:root[data-type] .eyebrow,:root[data-type] .col-label,:root[data-type] .bridge{font-size:15px!important}
+:root[data-type] .record .hist-label,:root[data-type] .record .head i{font-size:12px}
+/* plex: one family, IBM Plex Sans throughout */
+:root[data-type="plex"]{--serif:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif}
+:root[data-type="plex"] h1,:root[data-type="plex"] h2,:root[data-type="plex"] h3{font-weight:600}
+:root[data-type="plex"] h1{letter-spacing:-.01em}
+:root[data-type="plex"] .item b,:root[data-type="plex"] .stages b{font-weight:600;font-size:20px}
+:root[data-type="plex"] .who p{font-size:clamp(18px,1.7vw,23px);line-height:1.45}
+/* plexserif: the Plex superfamily, serif headings */
+:root[data-type="plexserif"]{--serif:'IBM Plex Serif',Georgia,serif}
+:root[data-type="plexserif"] h1,:root[data-type="plexserif"] h2,:root[data-type="plexserif"] h3{font-weight:400}
+:root[data-type="plexserif"] .item b,:root[data-type="plexserif"] .stages b{font-size:20px}
+/* source: Source Serif 4, a text serif with optical sizes; heavier, journal-like headings */
+:root[data-type="source"]{--serif:'Source Serif 4',Georgia,serif}
+:root[data-type="source"] h1,:root[data-type="source"] h2,:root[data-type="source"] h3{font-weight:600}
+:root[data-type="source"] .item b,:root[data-type="source"] .stages b{font-weight:600}
+/* calm: same fonts (Fraunces + IBM Plex Sans), only the typesetting changes: regular weight, no tight tracking */
+:root[data-type="calm"] h1,:root[data-type="calm"] h2,:root[data-type="calm"] h3{font-weight:400}
+</style>
+<script>document.documentElement.classList.add('js');(function(){var t=new URLSearchParams(location.search).get('type');if(/^(calm|plex|plexserif|source)$/.test(t||''))document.documentElement.dataset.type=t;})()</script>
+</head>
+<body>
+
+<div class="wrap">
+<nav>
+  <a class="wordmark" href="#top"><img class="mark" src="assets/logos/logo-06u2/giganteum-mark.svg?h=fabf64458b" width="28" height="28" alt="">giganteum<span>.</span></a>
+  <button class="menu" id="menu" aria-label="Open menu" aria-expanded="false" aria-controls="links">
+    <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20"/></svg>
+  </button>
+  <div class="links" id="links">
+    <a href="#trees">Trees</a>
+    <a href="#aerial">Aerial surveys</a>
+    <a href="#beyond">Beyond trees</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+</div>
+
+<main id="main">
+
+<header class="wrap" id="top">
+<section class="hero">
+  <div class="hero-copy" id="hero-copy">
+    <div class="hero-head">
+    <div class="eyebrow">A nonprofit for individual tree monitoring</div>
+    <h1>Every individual tree, monitored.</h1>
+    </div>
+    <div class="hero-body">
+    <p>We find and assess individual trees in satellite, aerial and drone imagery. We're building a record that follows each tree across captures, so changes can be examined over time.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="mailto:hello@giganteum.org?subject=Demo%20request">Request a demo</a>
+      <a class="btn" href="mailto:hello@giganteum.org?subject=Build%20with%20us">Build with us</a>
+    </div>
+    </div>
+  </div>
+  <div class="scene" id="hero-scene">
+    <canvas id="c-hero" aria-label="Illustration: a canopy of tree crowns with detections marked, one crown flagged and followed across captures" role="img"></canvas>
+    <button class="pause" id="pause" aria-pressed="false" aria-label="Pause animations" title="Pause animations">
+      <svg class="i-pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="1" width="3" height="10" fill="currentColor"/><rect x="7.5" y="1" width="3" height="10" fill="currentColor"/></svg>
+      <svg class="i-play" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>
+    </button>
+    <div class="record" id="record">
+      <div class="head"><b>Tree record</b><i>Illustrative record</i></div>
+      <div class="row" data-f="id"><span>Tree</span><span></span></div>
+      <div class="row status" data-f="status"><span>Status</span><span></span></div>
+      <div class="row" data-f="cls"><span>Class</span><span></span></div>
+      <div class="row" data-f="crown"><span>Crown</span><span></span></div>
+      <div class="row" data-f="pos"><span>Position</span><span></span></div>
+      <div class="row" data-f="caps"><span>Captures</span><span></span></div>
+      <div class="row" data-f="sensors"><span>Sensors</span><span></span></div>
+      <div class="hist-label" id="hist-label">History</div>
+      <div class="hist" id="hist"></div>
+    </div>
+  </div>
+</section>
+
+<div class="col-label how">How it works</div>
+<div class="loop">
+  <div><b><em>1</em>Anchor</b><p>A high-resolution capture establishes an initial estimate of each tree's location, crown and class.</p></div>
+  <div><b><em>2</em>Watch</b><p>Frequent, coarser imagery is read at those known crowns.</p></div>
+  <div><b><em>3</em>Reconcile</b><p>Link observations across dates and sources where alignment supports a match.</p></div>
+  <div><b><em>4</em>Assess</b><p>Mortality, decline, inventory and change, per tree.</p></div>
+</div>
+</header>
+
+<section class="wrap block" id="trees">
+  <div class="grid">
+    <div class="c4 lead">
+      <h2>What we can do on your imagery now, and what we are building toward.</h2>
+      <p>Three things we can deliver on a new site within weeks, and two we are building.</p>
+    </div>
+    <div class="c4">
+      <div class="col-label">Available now</div>
+      <div class="item"><em>01</em><div><b>Locate and count individual trees</b><p>Drone, aerial or 30 cm satellite. Each tree becomes a point with an estimated crown size and a confidence.</p></div></div>
+      <div class="item"><em>02</em><div><b>Find dead trees</b><p>Identify likely dead trees for review. This is the most reliable thing we do.</p></div></div>
+      <div class="item"><em>03</em><div><b>Sort trees by class</b><p>Mature from young, one species group from another, using examples reviewed with your team.</p></div></div>
+    </div>
+    <div class="c4">
+      <div class="col-label">In development</div>
+      <div class="item"><em>04</em><div><b>A history per tree</b><p>Every capture of the same crown, across sensors and years, on one record.</p></div></div>
+      <div class="item"><em>05</em><div><b>Early warning</b><p>We are researching whether repeated observations can reveal decline earlier.</p></div></div>
+      <div class="pull">We are a nonprofit, and we run like a startup: small, fast, and on your side.</div>
+    </div>
+    <div class="draft-band" id="draft-trees" data-v="1"><canvas id="c-draft-trees" role="img"></canvas></div>
+    <div class="figure-note" id="note-ew">
+      <div class="col-label">In development</div>
+      <p>Early warning means spotting a tree in decline before it dies. A dying tree changes over years, and a sequence of captures can show what a single image can't. Our first results are very exciting.</p>
+      <p><a class="textlink" href="mailto:hello@giganteum.org?subject=Early%20warning">Ask us about them</a></p>
+    </div>
+    <div class="draft-band" id="draft-trees2" data-v="4"><canvas id="c-draft-trees2" role="img"></canvas></div>
+  </div>
+  <p class="fine">Where the imagery can't support a claim about one tree, we say so and report at stand level.</p>
+</section>
+
+<section class="wrap block" id="adapts" style="padding-top:0">
+  <div class="grid">
+    <div class="c8 lead" style="max-width:640px">
+      <h2>How it adapts to your site</h2>
+      <p>A model trained on one forest usually struggles on the next, and on different imagery or a different season. We take a detector from open data down to your domain: your sensor, your forest, your season. Three stages.</p>
+    </div>
+    <div class="draft-band" id="draft-adapts" data-v="3"><canvas id="c-draft-adapts" role="img"></canvas></div>
+  </div>
+  <div class="stages">
+    <div><em>Stage 1</em><b>Our own base models</b><p>Trained in-house on crown annotations from around the world, across resolutions, so one model handles drone, aerial and satellite imagery.</p><small>Starting point for everything below.</small></div>
+    <div><em>Stage 2</em><b>Aligned to your domain</b><p>We correct the model's output on a sample of your own imagery and train on those corrections. Correcting is much faster than labeling from scratch, so this takes days rather than months.</p><small>We measure the review effort needed on your imagery.</small></div>
+    <div><em>Stage 3</em><b>Frozen, measured, improved on your terms</b><p>We freeze and version the model so results remain reproducible. We check each new capture on a reviewed sample before relying on its predictions. When an update helps, we test and release a new version.</p><small>Each capture is checked on a reviewed sample.</small></div>
+  </div>
+  <p class="measured">Every step is scored on imagery held back from training, and we show you the numbers. It works with the imagery you already have, or we help you get it: drone flights, public aerial archives with years of history, or 30 cm commercial satellite imagery when you need to cover a lot of ground.</p>
+</section>
+
+<section class="wrap block" id="aerial" style="border-top:1px solid var(--rule)">
+  <div class="aerial-grid">
+    <div class="aerial-scene" id="aerial-scene">
+      <canvas id="c-aerial" role="img" aria-label="Illustration: survey frames over savanna, most empty, animals detected in the rest"></canvas>
+      <button class="pause" aria-pressed="false" aria-label="Pause animations" title="Pause animations">
+      <svg class="i-pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="1" width="3" height="10" fill="currentColor"/><rect x="7.5" y="1" width="3" height="10" fill="currentColor"/></svg>
+      <svg class="i-play" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>
+    </button>
+      <div class="tally" id="tally">
+        <div><b id="t-frames">0</b><span>frames reviewed</span></div>
+        <div><b id="t-empty">0</b><span>empty, skipped</span></div>
+        <div><b id="t-animals">0</b><span>detections</span></div>
+      </div>
+    </div>
+    <div class="aerial-copy">
+      <div class="sec-head"><div class="eyebrow">Aerial wildlife surveys</div>
+      <h2>Most survey frames are empty. We find the ones that aren't.</h2></div>
+      <div class="sec-body"><p>A survey flight produces tens of thousands of frames, and the bulk of the work is looking at nothing. Our pipeline discards the empty frames, finds the animals in the rest, and sorts them by species.</p>
+      <p>It is built for surveys that change: new regions, seasons, aircraft and camera setups it has never seen, without retraining from scratch. Before Giganteum, our team built and ran this kind of pipeline on national-scale surveys.</p>
+      <p><a class="textlink" href="mailto:hello@giganteum.org?subject=Aerial%20survey">Tell us about your survey</a></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap block" id="beyond" style="border-top:1px solid var(--rule)">
+  <div class="beyond-grid">
+    <div class="beyond-copy">
+      <div class="sec-head"><div class="eyebrow">Beyond trees</div>
+      <h2>The same team, pointed at your problem.</h2></div>
+      <div class="sec-body"><p>Trees are the mission. When a project fits what we know and helps fund that mission, we take it on. What we know is building models that keep working after they leave the lab: in new places, new seasons, and on imagery nobody trained them for.</p>
+      <p>Before Giganteum, our team spent twenty years at this: identifying individual animals in photographs from camera traps, dive cameras, drones and survey aircraft; counting wildlife across whole landscapes from the air; mapping habitat from satellite; and building the datasets, pipelines and agentic research tooling behind it. That work is in daily use by thousands of researchers across more than a hundred species.</p>
+      <p class="bridge">What that experience covers:</p>
+      <ul class="beyond-list">
+        <li><b>ML systems that survive deployment.</b> <span>Inference, quality checks, monitoring and validation for models in daily use.</span></li>
+        <li><b>Detection, classification and individual re-identification</b> <span>from overhead and ground imagery.</span></li>
+        <li><b>Large scientific datasets.</b> <span>Curation, provenance, security and the tooling to review them.</span></li>
+        <li><b>Feasibility, proposals and program strategy</b> <span>for conservation and remote-sensing work.</span></li>
+      </ul>
+      <p>We show you how it works and how we check it.</p></div>
+    </div>
+    <div class="beyond-scene" id="beyond-scene">
+      <canvas id="c-beyond" role="img" aria-label="Illustration: detections in six kinds of imagery: forest and city streets from above, whales in satellite imagery, vessels and an offshore platform from above, open water from a boat, a trail from a camera trap"></canvas>
+      <button class="pause" aria-pressed="false" aria-label="Pause animations" title="Pause animations">
+      <svg class="i-pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="1" width="3" height="10" fill="currentColor"/><rect x="7.5" y="1" width="3" height="10" fill="currentColor"/></svg>
+      <svg class="i-play" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 1l9 5-9 5z" fill="currentColor"/></svg>
+    </button>
+    </div>
+  </div>
+</section>
+
+<section class="wrap block who" id="who">
+  <div class="eyebrow" style="margin-bottom:22px">Who we are</div>
+    <p>Giganteum is a small nonprofit with a startup's metabolism: a small team, no bureaucracy, twenty years of conservation technology behind us and trees ahead.</p>
+  <p>Those years were spent building the whole stack: new algorithms and the research behind them, data gathered from every continent, and models for detection, classification and re-identification that run in the field every day. We're bringing that experience to individual-tree monitoring.</p>
+    </section>
+
+<section class="wrap block contact" id="contact">
+  <h2>Try it on a place you care about</h2>
+  <p>If there is a forest, a park or a city you care about and some imagery of it, we'll run a session and show you what comes out, and what it would take to run inside your own systems. If you are building tools of your own, or want to join the mission, we'd like to hear from you.</p>
+  <div class="cta" style="margin-top:28px">
+    <a class="btn btn-primary" href="mailto:hello@giganteum.org?subject=Demo%20request">Request a demo</a>
+    <a class="btn" href="mailto:hello@giganteum.org?subject=Build%20with%20us">Build with us</a>
+  </div>
+</section>
+
+<div class="wrap">
+<footer>
+  <div>© 2026 Giganteum, Inc. — a 501(c)(3) nonprofit.</div>
+  <div>Every individual tree, monitored.</div>
+</footer>
+</div>
+</main>
+
+<script src="js/engine.js?h=83940f65bd" defer></script>
+<script src="js/scene-hero.js?h=67be435176" defer></script>
+<script src="js/scene-aerial.js?h=0674b0cf72" defer></script>
+<script src="js/scene-beyond.js?h=7d618247e9" defer></script>
+<script src="js/scene-drafts.js?h=15f0dc8a21" defer></script>
+<script src="js/main.js?h=858c3a48dd" defer></script>
+</body>
+</html>
