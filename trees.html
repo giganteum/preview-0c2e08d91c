@@ -228,6 +228,9 @@ section.block{padding-top:clamp(64px,7vw,96px);padding-bottom:clamp(48px,5vw,72p
 #trees .more{grid-column:1/-1;margin-top:4px}
 /* trees.html: the page title sits above the section like an eyebrow */
 .page-title{font-family:var(--sans);line-height:1.55;margin-bottom:22px}
+.preface{max-width:62ch;display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
+.preface p{font-size:clamp(17px,1.4vw,19px);color:var(--dim)}
+.preface p:last-child{font-size:15px}
 .figure-note[hidden]{display:none}
 .figure-note p{font-size:15.5px;color:var(--dim)}
 .figure-note h2{margin:6px 0 16px}
@@ -370,12 +373,17 @@ html.freeze *,html.freeze *::before,html.freeze *::after{transition:none!importa
 
 <section class="wrap block" id="trees">
   <h1 class="eyebrow page-title">Tree monitoring</h1>
+  <div class="preface">
+    <p>Finding individual trees is the first step. At satellite resolution it is a hard problem, and it is the one our pipelines are built for. On a new site we can deliver a first count within weeks. Following the same tree for years, across sensors and seasons, turns those detections into a record.</p>
+    <p>What we are working toward now is early warning, which means seeing in multispectral imagery that a tree's health is declining while there is still time to act. Our research so far is showing fascinating results.</p>
+    <p><a class="textlink" href="mailto:hello@giganteum.org?subject=Early%20warning">Ask us about it</a></p>
+  </div>
   <div class="grid">
+    <div class="draft-band" id="draft-trees" data-v="1"><canvas id="c-draft-trees" role="img"></canvas></div>
     <div class="figure-note" id="note-ew">
       <div class="col-label">In development</div>
       <h2>Early warning</h2>
-      <p>Early warning means spotting a tree in decline before it dies. A dying tree changes over years, and a sequence of captures can show what a single image can't. Our first results are very exciting.</p>
-      <p><a class="textlink" href="mailto:hello@giganteum.org?subject=Early%20warning">Ask us about them</a></p>
+      <p>A dying tree changes over years, and a sequence of captures can show what a single image can't.</p>
     </div>
     <div class="draft-band" id="draft-trees2" data-v="4"><canvas id="c-draft-trees2" role="img"></canvas></div>
   </div>
