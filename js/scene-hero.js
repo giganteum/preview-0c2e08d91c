@@ -47,8 +47,10 @@ function heroInit(){
   let ox=r()*TW, oy=r()*TH, vx=4.5, vy=2.2, t=0, fade=0;
   const spos=c=>{ let sx=((c.x-ox)%TW+TW)%TW, sy=((c.y-oy)%TH+TH)%TH; if(sx>S.W+120) sx-=TW; if(sy>S.H+120) sy-=TH; return [sx,sy]; };
   // the loop
-  const PH={calm:2.4,turn:2.6,lock:1.1,card:3.2,hold:3.2,release:.9};
-  let phase='calm', pt=0, tplIdx=0, focus=null, tpl=TPL[0];
+  // The first tree starts turning half a second after load (just after the canopy fades in), so a reader
+  // sees the change before scrolling on (owner, 2026-10-09); later trees wait PH.calm between cycles.
+  const PH={calm:1.6,turn:1.5,lock:.7,card:2.6,hold:3.2,release:.9}, FIRST=.5;
+  let phase='calm', pt=PH.calm-FIRST, tplIdx=0, focus=null, tpl=TPL[0];
   // the record's rectangle in canvas coordinates, padded; followed crowns stay clear of it
   function cardHit(sx,sy,rr){ const cr=canvas.getBoundingClientRect(), k=rec.getBoundingClientRect(); const p=18;
     return sx+rr>k.left-cr.left-p&&sx-rr<k.right-cr.left+p&&sy+rr>k.top-cr.top-p&&sy-rr<k.bottom-cr.top+p; }
@@ -63,7 +65,7 @@ function heroInit(){
   function onLayout(){ if(!focus){ if(motion.reduce||freeze) compose(freeze?'card':'hold'); return; } const [sx,sy]=spos(focus); if(inside(sx,sy,focus.r)<20||sx<0||sx>S.W||sy<0||sy>S.H){ if(motion.reduce||freeze){ focus.tint=null; focus.tk=0; } focus=null; phase='calm'; pt=0; rec.classList.remove('show'); fillCard(tpl,0); if(motion.reduce||freeze) compose(freeze?'card':'hold'); } }
   function tick(dt){ t+=dt; fade=Math.min(1,fade+dt*1.2); ox+=vx*dt; oy+=vy*dt; pt+=dt;
     if(phase==='calm'&&pt>PH.calm) next();
-    else if(phase==='turn'){ focus.tk=clamp(pt/PH.turn,0,1); focus.tint=tpl.tint; if(pt>PH.turn){ phase='lock'; pt=0; } }
+    else if(phase==='turn'){ const p=clamp(pt/PH.turn,0,1); focus.tk=1-(1-p)*(1-p); focus.tint=tpl.tint; if(pt>PH.turn){ phase='lock'; pt=0; } }
     else if(phase==='lock'&&pt>PH.lock){ phase='card'; pt=0; rec.classList.add('show'); }
     else if(phase==='card'){ fillCard(tpl,clamp(pt/PH.card,0,1.0001)); if(pt>PH.card){ phase='hold'; pt=0; } }
     else if(phase==='hold'&&pt>PH.hold){ phase='release'; pt=0; rec.classList.remove('show'); }
