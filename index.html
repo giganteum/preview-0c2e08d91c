@@ -6,15 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Giganteum — Every individual tree, monitored</title>
 <meta name="description" content="Giganteum is a nonprofit that finds and assesses individual trees in satellite, aerial and drone imagery.">
-<link rel="canonical" href="https://giganteum.github.io/preview-a3f9297cd7/">
+<link rel="canonical" href="https://giganteum.github.io/preview-0c2e08d91c/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Giganteum">
 <meta property="og:title" content="Giganteum — Every individual tree, monitored">
 <meta property="og:description" content="Giganteum is a nonprofit that finds and assesses individual trees in satellite, aerial and drone imagery.">
-<meta property="og:url" content="https://giganteum.github.io/preview-a3f9297cd7/">
-<meta property="og:image" content="https://giganteum.github.io/preview-a3f9297cd7/assets/og-card.jpg">
+<meta property="og:url" content="https://giganteum.github.io/preview-0c2e08d91c/">
+<meta property="og:image" content="https://giganteum.github.io/preview-0c2e08d91c/assets/og-card.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A canopy of tree crowns seen from above, one flagged brown, next to its tree record.">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/logos/logo-06u2/favicon.svg?h=ea83f946c8" type="image/svg+xml">
 <link rel="icon" href="assets/logos/logo-06u2/favicon.ico?h=4b74110f3c" sizes="32x32">
@@ -228,6 +229,9 @@ section.block{padding-top:clamp(64px,7vw,96px);padding-bottom:clamp(48px,5vw,72p
 #trees .more{grid-column:1/-1;margin-top:4px}
 /* trees.html: the page title sits above the section like an eyebrow */
 .page-title{font-family:var(--sans);line-height:1.55;margin-bottom:22px}
+/* 404.html */
+.notfound{min-height:50vh;display:flex;flex-direction:column;gap:16px}
+.notfound p{color:var(--dim);font-size:clamp(17px,1.4vw,19px)}
 .preface{max-width:62ch;display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
 .preface p{font-size:clamp(17px,1.4vw,19px);color:var(--dim)}
 .preface p:last-child{font-size:15px}
@@ -350,6 +354,9 @@ footer{border-top:1px solid var(--rule);padding:26px 0 40px;display:flex;justify
 /* ?freeze=1: deterministic frames for screenshot tests */
 html.freeze *,html.freeze *::before,html.freeze *::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Giganteum","legalName":"Giganteum, Inc.","url":"https://giganteum.github.io/preview-0c2e08d91c/","logo":"https://giganteum.github.io/preview-0c2e08d91c/assets/logos/logo-06u2/favicon-180.png","email":"hello@giganteum.org","nonprofitStatus":"Nonprofit501c3","description":"Giganteum is a nonprofit that finds and assesses individual trees in satellite, aerial and drone imagery."}
+</script>
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -361,7 +368,7 @@ html.freeze *,html.freeze *::before,html.freeze *::after{transition:none!importa
     <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20"/></svg>
   </button>
   <div class="links" id="links">
-    <a href="trees.html">Trees</a>
+    <a href="trees">Trees</a>
     <a href="#aerial">Aerial surveys</a>
     <a href="#beyond">Beyond trees</a>
     <a href="#contact">Contact</a>
@@ -434,7 +441,7 @@ html.freeze *,html.freeze *::before,html.freeze *::after{transition:none!importa
       <div class="item"><em>05</em><div><b>Early warning</b><p>We are researching whether repeated observations can reveal decline earlier.</p></div></div>
     </div>
     <div class="draft-band" id="draft-trees" data-v="1"><canvas id="c-draft-trees" role="img"></canvas></div>
-    <p class="more"><a class="textlink" href="trees.html">Read more about tree monitoring</a></p>
+    <p class="more"><a class="textlink" href="trees">Read more about tree monitoring</a></p>
   </div>
 </section>
 
